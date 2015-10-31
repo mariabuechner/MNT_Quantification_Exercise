@@ -5,7 +5,7 @@ shinyUI(pageWithSidebar(
   headerPanel("MNT Quantification Exercixe"),
   
   sidebarPanel(
-    selectInput("image_name", "Image Name", ls(img.names), selected="Cells")
+    selectInput("image_name", "Image Name", ls(img.names), selected="Cross")
     
   ),
   
@@ -17,7 +17,7 @@ shinyUI(pageWithSidebar(
         sliderInput('filter_size', 'Neighborhood Size', min=1, max=10,value=5,animate=T),
         sliderInput('filter_sigma', 'Sigma Value', min=0, max=10,value=3),
         #conditionalPanel(
-        #  condition = "input.filter_name == c('Gaussian','disc')",
+        #  condition = "input.filter_name == 'Gaussian'",
         #  sliderInput('filter_sigma', 'Sigma Value', min=0, max=10,value=3)),
         plotOutput("filterPlot"),
         plotOutput("fhistPlot")
@@ -28,6 +28,10 @@ shinyUI(pageWithSidebar(
                plotOutput("threshPlot") ,
                plotOutput("thistPlot"),
                dataTableOutput("samplesummary")
+               
+      ),
+      tabPanel("Metrics",
+               dataTableOutput("metrics_summary")
                
       ),
       tabPanel("Questions",includeMarkdown("questions.md"))

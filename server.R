@@ -50,5 +50,8 @@ shinyServer(function(input, output) {
     )
   })
   
+  ## Metrics
+  #output$metrics_summary <-renderTable()
+  
   
 })
