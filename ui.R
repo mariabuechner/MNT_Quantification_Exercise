@@ -1,12 +1,12 @@
 source("MNTExercise.R")
 
-
 shinyUI(pageWithSidebar(
   
   headerPanel("MNT Quantification Exercixe"),
   
   sidebarPanel(
-    selectInput("image_name", "Image Name", ls(img.names), selected="Cross")
+    selectInput("image_name", "Image Name", ls(img.names), selected="Cross"),
+    includeMarkdown("questions.md")
     
   ),
   
@@ -48,8 +48,8 @@ shinyUI(pageWithSidebar(
                tableOutput("metrics")
                
                
-      ),
-      tabPanel("Questions",includeMarkdown("questions.md"))
+      )#,
+      #tabPanel("Questions",includeMarkdown("questions.md"))
                
       )
     )

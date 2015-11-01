@@ -38,6 +38,7 @@ img.names$Tree<-function(...) {
 img.names$Breast<-function(...) {
   load("workspace.RData")
   out.img<-calc.img
+  out.img<-(out.img-min(out.img))/(max(out.img)-min(out.img))
   attr(out.img, "type") <- "grey"
   out.img
 }
@@ -58,6 +59,10 @@ filter.funs<-new.env()
 filter.funs$None<-function(img,size,sigma) img
 filter.funs$Gaussian<-function(img,size,sigma) gblur(img, 10*sigma, 10*size)
 filter.funs$Median<-function(img,size,sigma) medianFilter(img, size)
+filter.funs$Mean<-function(img,size, sigma) {
+  meanKernel<-matrix(1,size,size)/(size^2)
+  out.im<-filter2(img,meanKernel)
+}
 filter.funs$EdgeX<-function(img,size,sigma) {
   if(size==3) {
   laplacian<-matrix(
