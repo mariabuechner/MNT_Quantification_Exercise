@@ -56,10 +56,12 @@ shinyServer(function(input, output) {
       show.thresh.img(get.filtered.image(),input$threshold,input$invertTrheshold))
   })
   
+  output$metrics <-renderTable({
+    tab <- get.metrics.table(get.filtered.image(),input$threshold,input$invertTrheshold)
+  })
+  
   output$metricsSummary <-renderTable({
-    tab <- matrix(rep(1,6),nrow=3)
-    colnames(tab) <- c('col1','col2')
-    tab
+    tab <- get.metrics.summary(get.filtered.image(),input$threshold,input$invertTrheshold)
   })
   
   

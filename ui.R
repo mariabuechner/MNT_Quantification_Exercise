@@ -1,5 +1,6 @@
 source("MNTExercise.R")
 
+
 shinyUI(pageWithSidebar(
   
   headerPanel("MNT Quantification Exercixe"),
@@ -32,8 +33,20 @@ shinyUI(pageWithSidebar(
                
       ),
       tabPanel("Metrics",
-               plotOutput("binaryPlot") ,
-               tableOutput("metricsSummary")
+               plotOutput("binaryPlot"),
+               #fluidRow(
+                # column(1,
+                 #       tableOutput("metrics")
+                 #),
+                 #column(10,
+                #        tableOutput("metricsSummary")
+                # )
+               #)
+               helpText("Mean and Standard Deviation of some metrices over all labeled objects:"),
+               tableOutput("metricsSummary"),
+               helpText("Detailed table of metrices for each individual object:"),
+               tableOutput("metrics")
+               
                
       ),
       tabPanel("Questions",includeMarkdown("questions.md"))
