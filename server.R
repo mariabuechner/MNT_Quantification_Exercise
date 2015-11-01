@@ -36,7 +36,7 @@ shinyServer(function(input, output) {
   ## Threshold
   output$threshPlot <- renderPlot({
     print(
-      show.thresh.img(get.filtered.image(),input$threshold))
+      show.thresh.img(get.filtered.image(),input$threshold,input$invertTrheshold))
   })
   
   output$thistPlot <- renderPlot({
@@ -51,7 +51,16 @@ shinyServer(function(input, output) {
   })
   
   ## Metrics
-  #output$metrics_summary <-renderTable()
+  output$binaryPlot <- renderPlot({
+    print(
+      show.thresh.img(get.filtered.image(),input$threshold,input$invertTrheshold))
+  })
+  
+  output$metricsSummary <-renderTable({
+    tab <- matrix(rep(1,6),nrow=3)
+    colnames(tab) <- c('col1','col2')
+    tab
+  })
   
   
 })

@@ -25,13 +25,15 @@ shinyUI(pageWithSidebar(
       ),
       tabPanel("Threshold", 
                sliderInput('threshold', 'Threshold Value', min=0, max=1,value=0.5,animate=T),
-               plotOutput("threshPlot") ,
+               checkboxInput("invertTrheshold", label = "Invert", value = FALSE),
+               plotOutput("threshPlot"),
                plotOutput("thistPlot"),
                dataTableOutput("samplesummary")
                
       ),
       tabPanel("Metrics",
-               dataTableOutput("metrics_summary")
+               plotOutput("binaryPlot") ,
+               tableOutput("metricsSummary")
                
       ),
       tabPanel("Questions",includeMarkdown("questions.md"))

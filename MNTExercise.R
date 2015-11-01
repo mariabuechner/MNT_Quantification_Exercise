@@ -19,7 +19,7 @@ img.names$Cells<-function(...) {
 }
 img.names$Blobs<-function(...) {
   load("workspace.RData")
-  out.img<-blob.img
+  out.img<-1-blob.img
   attr(out.img, "type") <- "grey"
   out.img
 }
@@ -49,8 +49,8 @@ img.names$Cross<-function(...) {
              #val=(1.5*with(cross.im,abs(cos(x*y))/(abs(x*y)+(3*pi/nx)))+
               #0.5*runif(nrow(cross.im))))
              val=with(cross.im,1.5*((abs(x)<1) | (abs(y)<1))+
-              0.5*runif(nrow(cross.im))))
-  cross.im<-df.to.im(cross.im)
+              0.5*runif(nrow(cross.im))-0.5))
+  cross.im<-df.to.im(cross.im,inv=TRUE)
 }
 
 # Load filters
@@ -147,8 +147,8 @@ im.to.df<-function(in.img) {
 }
 df.to.im<-function(in.df,val.col="val",inv=F) {
   in.vals<-in.df[[val.col]]
-  if(class(in.vals[1])=="logical") in.vals<-as.integer(in.vals*255)
-  if(inv) in.vals<-255-in.vals
+  if(class(in.vals[1])=="logical") in.vals<-as.integer(in.vals*1)
+  if(inv) in.vals<-1-in.vals
   out.mat<-matrix(in.vals,nrow=length(unique(in.df$x)),byrow=F)
   attr(out.mat,"type")<-"grey"
   out.mat
@@ -164,10 +164,17 @@ show.img<-function(im.data) {
     labs(fill="Intensity",color="")+
     theme_bw(20)
 }
-show.thresh.img<-function(im.data,thresh.val) {
-  im.data$thresh<-(im.data$val<=thresh.val)
-  show.img(im.data)+
-    geom_tile(data=subset(im.data,thresh),aes(color="Below\nThreshold"),fill="red",alpha=0.3)
+show.thresh.img<-function(im.data,thresh.val,thres.invert=FALSE) {
+  if(thres.invert==FALSE) {
+    im.data$thresh<-(im.data$val<=thresh.val)
+    show.img(im.data)+
+      geom_tile(data=subset(im.data,thresh),aes(color="Below\nThreshold"),fill="red",alpha=0.3)
+  } else {
+    im.data$thresh<-(im.data$val>=thresh.val)
+    show.img(im.data)+
+      geom_tile(data=subset(im.data,thresh),aes(color="Above\nThreshold"),fill="red",alpha=0.3)
+  }
+  
 }
 get.hist.comparison<-function(dataA,colorName) {
   ggplot(dataA,aes(x=val))+
