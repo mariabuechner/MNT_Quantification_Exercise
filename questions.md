@@ -2,9 +2,9 @@
 Some questions to trigger discussions and considerations while changing the processing parameters, and comparing the quantitative results. Note that not all metrices are applicable for each image.
 
 #### Cross
-- How does the gauss filter affect the sizze of the thresheld cross?
-- Which filtered removes the noise best, while preserving the cross' shape?
-- Can you estimate the length of the edges? Hint: Is there a way enhance the edges? Which metric makes most sense?
+- How does the gauss filter affect the size of the thresheld cross?
+- Which filtered removes the noise best, while preserving its shape? And why?
+- Can you estimate the length of the edges? Hint: Is there a way to enhance the edges? Which metric makes most sense?
 - How can you detected all the edges?
 
 #### Dots
@@ -18,7 +18,7 @@ Some questions to trigger discussions and considerations while changing the proc
 
 #### Cells
 - Assuming you are not interested in small or weak objects. Which filter will work best?
-- What problems occur with the LoG when thresholding, even though we are looking atround objects?
+- What problems occur with the LoG when thresholding, even though we are looking at round objects? How could you improve its performance? Hint: Although now we can only apply one filter, usually multiple processing steps are necessary.
 
 #### Tree
 - How many rings are there? How and why do the results differe between LoG and EdgeX/EdgeY?

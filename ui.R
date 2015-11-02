@@ -2,7 +2,7 @@ source("MNTExercise.R")
 
 shinyUI(pageWithSidebar(
   
-  headerPanel("MNT Quantification Exercixe"),
+  headerPanel("MNT Quantification Exercise"),
   
   sidebarPanel(
     selectInput("image_name", "Image Name", ls(img.names), selected="Cross"),
